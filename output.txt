@@ -1,0 +1,21 @@
+フォルダー パスの一覧:  ボリューム Windows
+ボリューム シリアル番号は EA40-2343 です
+C:.
+|   favicon.ico
+|   image.jpg
+|   index.html
+|   main.js
+|   output.txt
+|   README.md
+|   style.css
+|   
+\---icons
+        about.txt
+        android-chrome-192x192.png
+        android-chrome-512x512.png
+        apple-touch-icon.png
+        favicon-16x16.png
+        favicon-32x32.png
+        og-image.png
+        site.webmanifest
+        
