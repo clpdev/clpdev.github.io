@@ -19,22 +19,3 @@
   .nav-item {
     display: inline-block;
   }
-.discord-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Adjust as necessary */
-}
-.discord-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.discord-logo {
-    width: 195px; /* Half of the original size */
-    height: 37px; /* Half of the original size */
-    margin-right: 10px; /* Space between logo and text */
-}
-.discord-text {
-    font-size: 1.5em; /* Adjust text size as necessary */
-}  
