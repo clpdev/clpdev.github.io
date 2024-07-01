@@ -1,0 +1,79 @@
+# Site settings
+title: CLP Dev Blog
+description: ここにメタディスクリプションのテキストを記述
+author: Hikaru Motegi
+email: blog.clpdev0625@gmail.com
+url: "https://clpdev.github.io" # ベースURL
+baseurl: "" # ベースURL (GitHub Pages用)
+lang: "ja" # サイトの言語設定
+twitter_username: CLPDEV
+github_username: clpdev
+timezone: Asia/Tokyo
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Google Tag Manager
+google_tag_manager: GTM-PWHX32GS
+
+# Social links
+social:
+  twitter: CLPDEV0625
+  github: clpdev/clpdev.github.io
+  discord: 7J4EwFqCEb
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"
+      author: "Hikaru Motegi"
+      description: "ここにメタディスクリプションのテキストを記述"
+      
+  - scope:
+      path: ""
+      type: "entry"
+    values:
+      layout: "entry" # entryコレクションにデフォルトのレイアウトを指定
+
+  - scope:
+      path: ""
+      type: "category"
+    values:
+      layout: "category" # categoryコレクションにデフォルトのレイアウトを指定
+
+collections:
+  category:
+    output: true
+    permalink: /category/:path/
+  entry:
+    output: true
+    permalink: /entry/:year/:month/:title/
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

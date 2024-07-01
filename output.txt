@@ -8,14 +8,22 @@ C:.
 |   README.md
 |   style.css
 |   
-\---icons
-        about.txt
-        android-chrome-192x192.png
-        android-chrome-512x512.png
-        apple-touch-icon.png
-        favicon-16x16.png
-        favicon-32x32.png
-        icons.svg
-        og-image.png
-        site.webmanifest
++---archive
+|   \---category
++---entry
+|       Xdeck.html
+|       
++---icons
+|       about.txt
+|       android-chrome-192x192.png
+|       android-chrome-512x512.png
+|       apple-touch-icon.png
+|       favicon-16x16.png
+|       favicon-32x32.png
+|       icons.svg
+|       og-image.png
+|       site.webmanifest
+|       
+\---templete
+        templete.html
         

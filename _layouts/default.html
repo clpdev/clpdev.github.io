@@ -15,25 +15,25 @@
         <!-- bootstrap icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <!-- Apple Touch Icons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
         <!-- Web App Manifest -->
-        <link rel="manifest" href="icons/site.webmanifest">
+        <link rel="manifest" href="assets/icons/site.webmanifest">
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://clpdev.github.io">
         <meta property="og:title" content="CLP Dev Blog">
         <meta property="og:description" content="ここにメタディスクリプションのテキストを記述">
-        <meta property="og:image" content="https://clpdev.github.io/icons/og-image.png">
+        <meta property="og:image" content="https://clpdev.github.io/assets/icons/og-image.png">
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:url" content="https://clpdev.github.io">
         <meta name="twitter:title" content="CLP Dev Blog">
         <meta name="twitter:description" content="ここにメタディスクリプションのテキストを記述">
-        <meta name="twitter:image" content="https://clpdev.github.io/icons/og-image.png">
+        <meta name="twitter:image" content="https://clpdev.github.io/assets/icons/og-image.png">
         <!-- Page property -->
         <meta name="theme-color" content="#f8f9fa"> <!-- ライトグレー -->
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
                 font-family: 'Roboto', sans-serif;
             }
         </style>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href=_site/assets/style.css>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -95,7 +95,7 @@
         <div class="container my-4 ">
             <div class="row justify-content-center">
                 <div class="col-lg mb-lg-4">
-                    <img src="icons/og-image.png" class="img-fluid" alt="" srcset="">
+                    <img src="assets/icons/og-image.png" class="img-fluid" alt="" srcset="">
                     <div class="text-center">
                         <h4>
                             <a href="https://www.canva.com/" target="_blank">created by canva</a>
@@ -109,6 +109,31 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="container">
+                <div class="row mb-2">
+                  {% for post in site.posts limit:2 %}
+                  <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                      <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary-emphasis">{{ post.categories | join: ", " }}</strong>
+                        <h3 class="mb-0">{{ post.title }}</h3>
+                        <div class="mb-1 text-body-secondary">{{ post.date | date: "%b %d" }}</div>
+                        <p class="card-text mb-auto">{{ post.excerpt }}</p>
+                        <a href="{{ post.url }}" class="icon-link gap-1 icon-link-hover stretched-link">
+                          Continue reading
+                          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                        </a>
+                      </div>
+                      <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              
             <div class="my-4">
                 <div class="text-center mb-4">
                     <h1>My Links</h1>
