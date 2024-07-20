@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ site.api_keys.google_maps }}&callback=initMap"></script>
+</head>
+<body>
+    <header>
+        <h1>{{ site.title }}</h1>
+    </header>
+    <main>
+        <div id="map" style="height: 500px; width: 100%;"></div>
+        <script>
+            function initMap() {
+                const map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8
+                });
+
+                // ルートとトリップ情報の読み込み
+                fetch('assets/gtfs_data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // ルート情報の描写
+                        data.routes.forEach(route => {
+                            console.log(route);
+                            // ここでルート情報をGoogle Mapsに描写
+                        });
+                    });
+
+                // シェイプ情報の読み込み
+                fetch('assets/shapes_data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // シェイプ情報の描写
+                        data.shapes.forEach(shape => {
+                            console.log(shape);
+                            // ここでシェイプ情報をGoogle Mapsに描写
+                        });
+                    });
+
+                // バス停情報の読み込み
+                fetch('assets/stops_data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // バス停情報の描写
+                        data.stops.forEach(stop => {
+                            new google.maps.Marker({
+                                position: { lat: parseFloat(stop.stop_lat), lng: parseFloat(stop.stop_lon) },
+                                map: map,
+                                title: stop.stop_name
+                            });
+                        });
+                    });
+            }
+        </script>
+    </main>
+    <footer>
+        <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    </footer>
+</body>
+</html>
