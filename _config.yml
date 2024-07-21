@@ -21,8 +21,7 @@ plugins:
   - jekyll-dotenv
 
 # API keys
-api_keys:
-  google_maps: "<%= ENV["GOOGLE_MAPS_API_KEY"] %>"
+GOOGLE_MAPS_API_KEY: "default_value"
 
 # Google Tag Manager
 google_tag_manager: GTM-PWHX32GS
