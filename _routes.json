@@ -1,9 +1,0 @@
-{
-    "routes": [
-      {
-        "pattern": "/fetch-gtfs-data",
-        "path": "/functions/fetch-gtfs-data"
-      }
-    ]
-  }
-  
