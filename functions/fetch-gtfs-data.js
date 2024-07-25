@@ -1,5 +1,4 @@
 import { transit_realtime } from 'gtfs-realtime-bindings';
-import fetch from 'node-fetch';
 
 export function onRequest(context) {
   const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php';

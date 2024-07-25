@@ -1,0 +1,5 @@
+name = "your-project-name"
+type = "javascript"
+
+[build]
+command = "npm install"
