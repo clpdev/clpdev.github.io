@@ -1,23 +1,22 @@
 import { transit_realtime } from 'gtfs-realtime-bindings';
 
-export function onRequest(context) {
+export async function onRequest(context) {
   const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php';
-  
-  return fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.arrayBuffer();
-    })
-    .then(buffer => {
-      const data = transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
-      return new Response(JSON.stringify(data), {
-        headers: { 'Content-Type': 'application/json' },
-      });
-    })
-    .catch(error => {
-      return new Response('Error: ' + error.message, { status: 500 });
-    });
-}
 
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const buffer = await response.arrayBuffer();
+    const data = transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
+    const jsonData = JSON.stringify(data);
+
+    return new Response(jsonData, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response('Error: ' + error.message, { status: 500 });
+  }
+}
