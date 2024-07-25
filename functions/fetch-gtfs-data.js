@@ -1,4 +1,4 @@
-import { GTFSRealtimeBindings } from '@googlemaps/gtfs-realtime-bindings';
+import { GTFSRealtimeBindings } from 'gtfs-realtime-bindings';
 import fetch from 'node-fetch';
 
 export default {
