@@ -1,4 +1,5 @@
 let map;
+let markers = [];
 
 async function fetchJSON(url) {
   const response = await fetch(url);
@@ -15,6 +16,11 @@ async function initMap() {
   const routesData = await fetchJSON('/assets/js/routes_data.json');
 
   drawShapes(shapesData.shapes, routesData.routes);
+  
+  // 最初にデータをフェッチ
+  fetchData();
+  // 30秒ごとにデータをフェッチ
+  setInterval(fetchData, 30000);
 }
 
 function drawShapes(shapes, routes) {
@@ -60,6 +66,43 @@ function drawShapes(shapes, routes) {
 
     polyline.setMap(map);
   });
+}
+
+async function fetchData() {
+  try {
+    const response = await fetch('/fetch-gtfs-data');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    displayMarkers(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+function displayMarkers(data) {
+  // 現在のマーカーをクリア
+  clearMarkers();
+
+  const entities = data.entity;
+  entities.forEach(entity => {
+    const position = entity.vehicle.position;
+    const latLng = new google.maps.LatLng(position.latitude, position.longitude);
+
+    const marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: entity.vehicle.vehicle.id
+    });
+
+    markers.push(marker);
+  });
+}
+
+function clearMarkers() {
+  markers.forEach(marker => marker.setMap(null));
+  markers = [];
 }
 
 window.initMap = initMap;
