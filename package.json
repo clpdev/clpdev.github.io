@@ -1,0 +1,9 @@
+{
+    "name": "cloudflare-pages-functions",
+    "version": "1.0.0",
+    "dependencies": {
+      "node-fetch": "^3.0.0",
+      "@googlemaps/gtfs-realtime-bindings": "^0.3.0"
+    }
+  }
+  
