@@ -1,31 +1,24 @@
-import { GTFSRealtimeBindings } from 'gtfs-realtime-bindings';
+import { transit_realtime } from 'gtfs-realtime-bindings';
 import fetch from 'node-fetch';
 
-export default {
-  async fetch(req) {
-    // GTFS-RTデータを取得するURL
-    const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php';
-    
-    try {
-      // データを取得
-      const response = await fetch(url);
+export function onRequest(context) {
+  const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php';
+  
+  return fetch(url)
+    .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      
-      // レスポンスをバイナリ形式で取得
-      const buffer = await response.arrayBuffer();
-      
-      // バイナリデータをJSONに変換
-      const data = GTFSRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
-      const jsonData = JSON.stringify(data);
-      
-      // JSONレスポンスを返す
-      return new Response(jsonData, {
+      return response.arrayBuffer();
+    })
+    .then(buffer => {
+      const data = transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
+      return new Response(JSON.stringify(data), {
         headers: { 'Content-Type': 'application/json' },
       });
-    } catch (error) {
+    })
+    .catch(error => {
       return new Response('Error: ' + error.message, { status: 500 });
-    }
-  }
-};
+    });
+}
+
