@@ -21,6 +21,8 @@ async function initMap() {
   fetchData();
   // 30秒ごとにデータをフェッチ
   setInterval(fetchData, 30000);
+  // ページが移動する前にマーカーを消去
+  window.addEventListener('beforeunload', clearMarkers);
 }
 
 function drawShapes(shapes, routes) {
