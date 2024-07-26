@@ -6,7 +6,15 @@ async function fetchJSON(url) {
   return response.json();
 }
 
+function clearMap() {
+  if (map) {
+    map = null;
+    document.getElementById('map').innerHTML = '';
+  }
+}
+
 async function initMap() {
+  clearMap();
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 36.1389, lng: 139.388697 },
     zoom: 13
