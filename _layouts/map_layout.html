@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
-    <script type="module" src="/assets/js/map.js"></script>
 </head>
 <body>
     <header>
@@ -17,6 +16,7 @@
     <footer>
         <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.env.GOOGLE_MAPS_API_KEY }}&callback=initMap&v=weekly&libraries=marker" async defer ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.env.GOOGLE_MAPS_API_KEY }}&callback=initMap&v=weekly&libraries=marker" async></script>
+    <script type="module" src="/assets/js/map.js"></script>
 </body>
 </html>
