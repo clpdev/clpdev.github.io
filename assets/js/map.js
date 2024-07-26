@@ -9,7 +9,8 @@ async function fetchJSON(url) {
 async function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 36.1389, lng: 139.388697 },
-    zoom: 13
+    zoom: 13,
+    mapId: "DEMO_MAP_ID", // Map ID is required for advanced markers.
   });
 
   const shapesData = await fetchJSON('/assets/js/shapes_data.json');
@@ -90,9 +91,9 @@ function displayMarkers(data) {
     const position = entity.vehicle.position;
     const latLng = new google.maps.LatLng(position.latitude, position.longitude);
 
-    const marker = new google.maps.Marker({
+    const marker = new google.maps.marker.AdvancedMarkerElement({
+      map,
       position: latLng,
-      map: map,
       title: entity.vehicle.vehicle.id
     });
 
