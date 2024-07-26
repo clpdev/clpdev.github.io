@@ -114,3 +114,9 @@ function clearMarkers() {
 }
 
 window.initMap = initMap;
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    initMap();
+  }
+});
