@@ -1,22 +1,37 @@
 let map;
 let markers = [];
 
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded eventが発生しました');
+
+  // Google Maps APIスクリプトを動的に追加
+  const script = document.createElement('script');
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${window.googleMapsApiKey}&callback=initMap&_=${new Date().getTime()}`;
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+});
+
 async function fetchJSON(url) {
   const response = await fetch(url);
   return response.json();
 }
 
 async function initMap() {
-
+  console.log('initMap関数が呼ばれました');
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 36.1389, lng: 139.388697 },
     zoom: 13
   });
 
-  const shapesData = await fetchJSON('/assets/js/shapes_data.json');
-  const routesData = await fetchJSON('/assets/js/routes_data.json');
+  try {
+    const shapesData = await fetchJSON('/assets/js/shapes_data.json');
+    const routesData = await fetchJSON('/assets/js/routes_data.json');
 
-  drawShapes(shapesData.shapes, routesData.routes);
+    drawShapes(shapesData.shapes, routesData.routes);
+  } catch (error) {
+    console.error('Error fetching shapes or routes data:', error);
+  }
   
   // 最初にデータをフェッチ
   fetchData();
