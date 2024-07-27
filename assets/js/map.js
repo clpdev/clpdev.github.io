@@ -15,6 +15,8 @@ async function initMap() {
     zoom: 13,
   });
 
+  initMap();
+
   const shapesData = await fetchJSON('/assets/js/shapes_data.json');
   const routesData = await fetchJSON('/assets/js/routes_data.json');
 
