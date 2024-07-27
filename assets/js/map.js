@@ -7,10 +7,12 @@ async function fetchJSON(url) {
 }
 
 async function initMap() {
+  //@ts-ignore
+  const { Map } = await google.maps.importLibrary("maps");
+
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 36.1389, lng: 139.388697 },
     zoom: 13,
-    mapId: "DEMO_MAP_ID", // Map ID is required for advanced markers.
   });
 
   const shapesData = await fetchJSON('/assets/js/shapes_data.json');
@@ -91,8 +93,8 @@ function displayMarkers(data) {
     const position = entity.vehicle.position;
     const latLng = new google.maps.LatLng(position.latitude, position.longitude);
 
-    const marker = new google.maps.marker.AdvancedMarkerElement({
-      map,
+    const marker = new google.maps.Marker({
+      map: map,
       position: latLng,
       title: entity.vehicle.vehicle.id
     });
