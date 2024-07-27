@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.env.GOOGLE_MAPS_API_KEY }}&callback=initMap" async defer></script>
     <script type="module" src="/assets/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.env.GOOGLE_MAPS_API_KEY }}&callback=initMap" async defer></script>
 </head>
 <body>
     <header>
