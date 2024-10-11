@@ -34,8 +34,8 @@ async function initMap() {
   }
   
   // 最初にデータをフェッチ
-  fetchData();
-  // 30秒ごとにデータをフェッチ
+  fetchVehiclePositions();
+  // 10秒ごとにデータをフェッチ
   setInterval(fetchData, 10000);
 }
 
@@ -84,41 +84,40 @@ function drawShapes(shapes, routes) {
   });
 }
 
-async function fetchData() {
+async function fetchVehiclePositions() {
   try {
-    const response = await fetch('/fetch-gtfs-data');
+    const response = await fetch('/fetch-vehicle-positions');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const data = await response.json();
-    displayMarkers(data);
+    const vehiclePositions = await response.json();
+
+    // Vehicle Positionsのデータを基にマーカーを更新
+    updateVehicleMarkers(vehiclePositions);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching vehicle positions:', error);
   }
 }
 
-function displayMarkers(data) {
-  // 現在のマーカーをクリア
-  clearMarkers();
+function updateVehicleMarkers(vehiclePositions) {
+  // 既存のマーカーをクリア
+  clearVehicleMarkers();
 
-  const entities = data.entity;
-  entities.forEach(entity => {
-    const position = entity.vehicle.position;
-    const latLng = new google.maps.LatLng(position.latitude, position.longitude);
-
+  // Vehicle Positionsに基づいて新しいマーカーを追加
+  vehiclePositions.forEach(position => {
     const marker = new google.maps.Marker({
-      position: latLng,
+      position: { lat: position.position.latitude, lng: position.position.longitude },
       map: map,
-      title: entity.vehicle.vehicle.id
+      //icon: '/path/to/vehicle-icon.png', // アイコンを車両用に設定
     });
-
-    markers.push(marker);
+    vehicleMarkers.push(marker); // vehicleMarkersは既存のマーカーの配列
   });
 }
 
-function clearMarkers() {
-  markers.forEach(marker => marker.setMap(null));
-  markers = [];
+function clearVehicleMarkers() {
+  // 既存のマーカーをすべて削除
+  vehicleMarkers.forEach(marker => marker.setMap(null));
+  vehicleMarkers = [];
 }
 
 window.initMap = initMap;

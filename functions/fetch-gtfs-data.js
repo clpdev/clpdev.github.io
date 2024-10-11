@@ -1,7 +1,7 @@
 import { transit_realtime } from 'gtfs-realtime-bindings';
 
 export async function onRequest(context) {
-  const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php';
+  const url = 'http://kumagaya.bus-go.com/GTFS-RT/encode_vehicle.php'; // Vehicle position endpoint
 
   try {
     const response = await fetch(url);
@@ -10,8 +10,15 @@ export async function onRequest(context) {
     }
 
     const buffer = await response.arrayBuffer();
-    const data = transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
-    const jsonData = JSON.stringify(data);
+    const feedMessage = transit_realtime.FeedMessage.decode(new Uint8Array(buffer));
+
+    // Vehicle Positionsだけを抽出
+    const vehiclePositions = feedMessage.entity
+      .filter(entity => entity.vehicle)
+      .map(entity => entity.vehicle);
+
+    // JSON形式でVehicle Positionsだけを返す
+    const jsonData = JSON.stringify(vehiclePositions);
 
     return new Response(jsonData, {
       headers: { 'Content-Type': 'application/json' },
