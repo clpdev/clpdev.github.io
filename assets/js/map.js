@@ -86,7 +86,7 @@ function drawShapes(shapes, routes) {
 
 async function fetchVehiclePositions() {
   try {
-    const response = await fetch('/fetch-vehicle-positions');
+    const response = await fetch('/functions');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
