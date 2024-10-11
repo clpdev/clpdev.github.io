@@ -35,8 +35,8 @@ async function initMap() {
   
   // 最初にデータをフェッチ
   fetchVehiclePositions();
-  // 10秒ごとにデータをフェッチ
-  setInterval(fetchData, 10000);
+  // 30秒ごとにデータをフェッチ
+  setInterval(fetchVehiclePositions, 30000);
 }
 
 function drawShapes(shapes, routes) {
